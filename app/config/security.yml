@@ -1,0 +1,20 @@
+security:
+    providers:
+        _hwi_provider:
+             id: aouth_user_provider
+
+    firewalls:
+        secured_area:
+            oauth:
+                resource_owners:
+                    facebook:           "/login/check-facebook"
+                login_path:        /login
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: aouth_user_provider
+            anonymous: true
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
